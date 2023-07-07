@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+    <tr>
+        <th>Tên</th>
+        <th>Giá</th>
+        <th>Ngày</th>
+        <th>Tổng tiền</th>
+    </tr>
+    <tr th:each="o:${list}">
+        <td th:text="${o.product.name}"></td>
+        <td th:text="${o.price}"></td>
+        <td th:text="${o.order.createdate}"></td>
+        <td th:text="${o.order.totalamount}"></td>
+<!--        <td><a th:href="@{/hoa-don/detail/{id}(id=${o.id})}">Detail</a></td>-->
+    </tr>
+</table>
+</body>
+</html>

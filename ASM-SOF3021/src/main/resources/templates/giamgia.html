@@ -1,0 +1,19 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<table border="1">
+  <tr>
+    <th>Tên</th>
+    <th>Số lượng</th>
+  </tr>
+  <tr th:each="o:${list}">
+    <td th:text="${o.ten}"></td>
+    <td><a th:href="@{/discount/add/{id}(id=${o.id})}">Tạo Giảm giá</a></td>
+  </tr>
+</table>
+</body>
+</html>

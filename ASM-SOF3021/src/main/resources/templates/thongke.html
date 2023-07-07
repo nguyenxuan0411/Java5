@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8">
+    <title>Thống kê</title>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.6.0/Chart.min.js"></script>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+
+</head>
+<body>
+<h1>Thống kê </h1>
+<a th:href="@{/sac/thongketheongay}">Theo ngày</a>
+<a th:href="@{/sac/thongketheothang}">Theo tháng</a>
+<a th:href="@{/sac/thongketheonam}">Theo năm</a>
+<a th:href="@{/sac/thongketheotuan}">Theo tuần</a>
+<a th:href="@{/sac/spTon}">Sp tồn</a>
+<table border="1">
+    <tr>
+        <th>Tên</th>
+        <th>Số lượng</th>
+    </tr>
+    <tr th:each="o:${list}">
+        <td th:text="${o.ten}"></td>
+        <td th:text="${o.soLuong}"></td>
+    </tr>
+</table>
+
+<h2>Biểu đồ:</h2>
+<div class="container">
+    <canvas id="myChart"></canvas>
+</div>
+<script>
+    let myChart = document.getElementById('myChart').getContext('2d');
+    // Global Options
+    Chart.defaults.global.defaultFontFamily = 'Lato';
+    Chart.defaults.global.defaultFontSize = 18;
+    Chart.defaults.global.defaultFontColor = '#777';
+
+    let massPopChart = new Chart(myChart, {
+        type: 'bar',
+        data: {
+            labels:[<ul>
+                <li th:each="item : ${list}" th:text="${item.ten}"></li>
+            </ul> ]
+
+                            // <tr th:each="sp: ${list}">
+                //     <td th:text="${sp.ten}"></td>
+                // </tr>
+            ,
+            datasets: [{
+                label: 'Số lượng Bán',
+                data: [
+                    <ul>
+                        <li th:each="item : ${list}" th:text="${item.soLuong}"></li>
+                    </ul>
+                ]
+                // [[${list.![soLuong]}]]
+                    // <tr  th:each="sp: ${list}">
+                    //     <td th:text="${sp.soLuong}"></td>
+                    // </tr>
+                ,
+                //backgroundColor:'green',
+                backgroundColor: [
+                    'rgba(255, 99, 132, 0.6)',
+                    'rgba(54, 162, 235, 0.6)',
+                    'rgba(255, 206, 86, 0.6)',
+                    'rgba(75, 192, 192, 0.6)',
+                    'rgba(153, 102, 255, 0.6)',
+                    'rgba(255, 159, 64, 0.6)',
+                    'rgba(128, 99, 105, 0.6)',
+                    'rgba(97, 171, 64, 0.6)',
+                    'rgba(128, 128, 128, 0.6)',
+                    'rgba(74, 0, 2, 0.6)'
+                ],
+                borderWidth: 1,
+                borderColor: '#777',
+                hoverBorderWidth: 3,
+                hoverBorderColor: '#000'
+            }]
+        },
+        options: {
+            title: {
+                display: true,
+                text: '${hienThi}',
+                fontSize: 25
+            },
+            legend: {
+                display: true,
+                position: 'right',
+                labels: {
+                    fontColor: '#000'
+                }
+            },
+            layout: {
+                padding: {
+                    left: 50,
+                    right: 0,
+                    bottom: 0,
+                    top: 0
+                }
+            },
+            tooltips: {
+                enabled: true
+            }
+        }
+    });
+</script>
+</body>
+</html>

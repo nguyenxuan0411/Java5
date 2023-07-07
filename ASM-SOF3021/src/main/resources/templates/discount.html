@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+<form method="post" th:object="${discount}">
+    <label for="discountLevel">Mức giảm giá:</label>
+    <select id="discountLevel" name="discountAmount">
+        <option th:value="5">5%</option>
+        <option th:value="10">10%</option>
+        <option th:value="20">20%</option>
+        <!-- Thêm các mức giảm giá khác vào đây nếu cần -->
+    </select>
+
+<!--    <label for="startDate">Ngày bắt đầu:</label>-->
+<!--    <input type="date" id="startDate" name="startDate">-->
+
+<!--    <label for="endDate">Ngày kết thúc:</label>-->
+<!--    <input type="date" id="endDate" name="endDate">-->
+
+    <button type="submit">Submit</button>
+</form>
+
+<table border="1">
+    <tr>
+        <th>Tên</th>
+        <th>Mức giảm</th>
+    </tr>
+    <tr th:each="o:${list}">
+        <td th:text="${o.product.name}"></td>
+        <td th:text="${o.discountAmount}"></td>
+    </tr>
+</table>
+</body>
+</html>
